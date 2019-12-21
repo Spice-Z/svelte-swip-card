@@ -1,6 +1,9 @@
 <script>
   import { spring } from "svelte/motion";
   import { pannable } from "./pannable.js";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let image = "";
 
@@ -44,7 +47,8 @@
       }
       setTimeout(() => {
         coords.set({ x: 0, y: 0 }, { hard: true });
-      }, 500);
+      }, 400);
+      dispatch("cardSwiped");
       return;
     }
     coords.stiffness = 0.1;

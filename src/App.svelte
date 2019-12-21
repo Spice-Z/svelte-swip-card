@@ -6,12 +6,17 @@
 
   onMount(async () => {
     const res = await Promise.all([
-      fetch(`https://source.unsplash.com/random`),
-      fetch(`https://source.unsplash.com/random`)
+      fetch('https://source.unsplash.com/random'),
+      fetch('https://source.unsplash.com/random')
     ]);
-
     images = await [res[0].url, res[1].url];
   });
+
+  const cardSwiped = async () => {
+    const res = await fetch('https://source.unsplash.com/random');
+    images = [res.url, images[1]]
+  }
+  
 </script>
 
 <style>
@@ -36,5 +41,5 @@
 
 <div class="nav">header</div>
 <div class="main">
-  <Card image={images[0]}/>
+  <Card image={images[0]} on:cardSwiped={cardSwiped}/>
 </div>
