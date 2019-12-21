@@ -3,20 +3,28 @@
   import Card from "./Card.svelte";
 
   let images = [];
+  let nextSecondImage = "";
 
   onMount(async () => {
     const res = await Promise.all([
       fetch("https://source.unsplash.com/random"),
-      fetch("https://source.unsplash.com/random")
+      fetch("https://source.unsplash.com/random"),
+      fetch("https://source.unsplash.com/random"),
     ]);
     images = await [res[0].url, res[1].url];
+    nextSecondImage = await res[2].url;
   });
 
-  const cardSwiped = async () => {
+  const cardSwipeStart = async () => {
+    images = [images[1],images[1]]
     const res = await fetch("https://source.unsplash.com/random");
-    images = [images[1], res.url];
-    console.log(images)
+    nextSecondImage = res.url;
   };
+
+  const cardSwipeEnd = () => {
+    images = [images[1],nextSecondImage]
+  }
+  
 </script>
 
 <style>
@@ -41,5 +49,6 @@
 
 <div class="nav">header</div>
 <div class="main">
-  <Card image={images[0]} on:cardSwiped={cardSwiped} />
+  <Card image={images[1]}/>
+  <Card image={images[0]} isFront on:cardSwipeStart={cardSwipeStart} on:cardSwipeEnd={cardSwipeEnd} />
 </div>

@@ -6,6 +6,7 @@
   const dispatch = createEventDispatcher();
 
   export let image = "";
+  export let isFront = false;
 
   const coords = spring(
     { x: 0, y: 0 },
@@ -45,10 +46,11 @@
           { soft: 0.4 }
         );
       }
+      dispatch("cardSwipeStart");
       setTimeout(() => {
         coords.set({ x: 0, y: 0 }, { hard: true });
+        dispatch("cardSwipeEnd");
       }, 400);
-      dispatch("cardSwiped");
       return;
     }
     coords.stiffness = 0.1;
@@ -63,11 +65,13 @@
     --height: 60vh;
     width: var(--width);
     height: var(--height);
-    left: calc(50% - var(--width) / 2);
-    top: calc(50% - var(--height) / 2);
     border-radius: 4px;
     background-color: #ff3e00;
     cursor: move;
+  }
+
+  .card--back {
+    position: absolute;
   }
 
   .card-img {
@@ -77,12 +81,18 @@
   }
 </style>
 
-<div
-  class="card"
-  use:pannable
-  on:swipestart={handleSwipeStart}
-  on:swipemove={handleSwipeMove}
-  on:swipeend={handleSwipeEnd}
-  style="transform: translate3d({$coords.x}px,{$coords.y}px,0px) rotate({$coords.x * -0.05}deg)">
-  <img class="card-img" src={image} alt="" role="presentation" />
-</div>
+{#if isFront}
+  <div
+    class="card"
+    use:pannable
+    on:swipestart={handleSwipeStart}
+    on:swipemove={handleSwipeMove}
+    on:swipeend={handleSwipeEnd}
+    style="transform: translate3d({$coords.x}px,{$coords.y}px,0px) rotate({$coords.x * -0.05}deg)">
+    <img class="card-img" src={image} alt="" role="presentation" />
+  </div>
+{:else}
+  <div class="card card--back">
+    <img class="card-img" src={image} alt="" role="presentation" />
+  </div>
+{/if}
