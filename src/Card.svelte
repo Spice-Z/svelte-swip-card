@@ -51,7 +51,7 @@
       setTimeout(() => {
         coords.set({ x: 0, y: 0 }, { hard: true });
         dispatch("cardSwipeEnd");
-      }, swipeTime);
+      }, swipeTime * 1000);
       return;
     }
     coords.stiffness = 0.1;
