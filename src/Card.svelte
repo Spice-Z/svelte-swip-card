@@ -28,6 +28,7 @@
   };
 
   const handleSwipeEnd = event => {
+    const swipeTime = 0.3;
     const isEnoughSwipe =
       $coords.x >= 0
         ? $coords.x > window.innerWidth / 3
@@ -38,19 +39,19 @@
       if ($coords.x >= 0) {
         coords.set(
           { x: window.innerWidth + $coords.x, y: $coords.y },
-          { soft: 0.4 }
+          { soft: swipeTime }
         );
       } else {
         coords.set(
           { x: window.innerWidth * -1 + $coords.x, y: $coords.y },
-          { soft: 0.4 }
+          { soft: swipeTime }
         );
       }
       dispatch("cardSwipeStart");
       setTimeout(() => {
         coords.set({ x: 0, y: 0 }, { hard: true });
         dispatch("cardSwipeEnd");
-      }, 400);
+      }, swipeTime);
       return;
     }
     coords.stiffness = 0.1;
