@@ -65,4 +65,4 @@
   on:swipestart={handleSwipeStart}
   on:swipemove={handleSwipeMove}
   on:swipeend={handleSwipeEnd}
-  style="transform: translate3d({$coords.x}px,{$coords.y}px,0px) rotate({$coords.x * 0.05}deg)" />
+  style="transform: translate3d({$coords.x}px,{$coords.y}px,0px) rotate({$coords.x * -0.05}deg)" />
