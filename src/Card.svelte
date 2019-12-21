@@ -32,12 +32,12 @@
       if ($coords.x >= 0) {
         coords.set(
           { x: window.innerWidth + $coords.x, y: $coords.y },
-          { soft: 0.7 }
+          { soft: 0.4 }
         );
       } else {
         coords.set(
           { x: window.innerWidth * -1 + $coords.x, y: $coords.y },
-          { soft: 0.5 }
+          { soft: 0.4 }
         );
       }
       setTimeout(() => {
