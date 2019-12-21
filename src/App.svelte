@@ -1,5 +1,17 @@
 <script>
-  import Card from './Card.svelte';
+  import { onMount } from "svelte";
+  import Card from "./Card.svelte";
+
+  let images = [];
+
+  onMount(async () => {
+    const res = await Promise.all([
+      fetch(`https://source.unsplash.com/random`),
+      fetch(`https://source.unsplash.com/random`)
+    ]);
+
+    images = await [res[0].url, res[1].url];
+  });
 </script>
 
 <style>
@@ -24,5 +36,5 @@
 
 <div class="nav">header</div>
 <div class="main">
-  <Card/>
+  <Card image={images[0]}/>
 </div>

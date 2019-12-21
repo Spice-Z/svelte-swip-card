@@ -2,6 +2,8 @@
   import { spring } from "svelte/motion";
   import { pannable } from "./pannable.js";
 
+  export let image = "";
+
   const coords = spring(
     { x: 0, y: 0 },
     {
@@ -63,6 +65,12 @@
     background-color: #ff3e00;
     cursor: move;
   }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 </style>
 
 <div
@@ -71,4 +79,6 @@
   on:swipestart={handleSwipeStart}
   on:swipemove={handleSwipeMove}
   on:swipeend={handleSwipeEnd}
-  style="transform: translate3d({$coords.x}px,{$coords.y}px,0px) rotate({$coords.x * -0.05}deg)" />
+  style="transform: translate3d({$coords.x}px,{$coords.y}px,0px) rotate({$coords.x * -0.05}deg)">
+  <img class="card-img" src={image} alt="" role="presentation" />
+</div>
