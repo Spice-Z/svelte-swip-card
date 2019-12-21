@@ -24,24 +24,30 @@
   const handleSwipeEnd = event => {
     const isEnoughSwipe =
       $coords.x >= 0
-        ? $coords.x > window.innerWidth / 4
-        : $coords.x * -1 > window.innerWidth / 4;
+        ? $coords.x > window.innerWidth / 3
+        : $coords.x * -1 > window.innerWidth / 3;
     if (isEnoughSwipe) {
       coords.stiffness = 0.1;
       coords.damping = 0.3;
       if ($coords.x >= 0) {
-        coords.set({ x: window.innerWidth + 100, y: $coords.y });
+        coords.set(
+          { x: window.innerWidth + $coords.x, y: $coords.y },
+          { soft: 0.7 }
+        );
       } else {
-        coords.set({ x: window.innerWidth * -1 - 100, y: $coords.y });
+        coords.set(
+          { x: window.innerWidth * -1 + $coords.x, y: $coords.y },
+          { soft: 0.5 }
+        );
       }
       setTimeout(() => {
-        coords.set({ x: 0, y: 0 });
+        coords.set({ x: 0, y: 0 }, { hard: true });
       }, 500);
       return;
     }
     coords.stiffness = 0.1;
     coords.damping = 0.3;
-    coords.set({ x: 0, y: 0 });
+    coords.set({ x: 0, y: 0 }, { soft: 0.5 });
   };
 </script>
 
