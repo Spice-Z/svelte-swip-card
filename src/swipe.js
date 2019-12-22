@@ -1,4 +1,4 @@
-export function pannable(node) {
+export function swipe(node) {
   let x;
   let y;
 

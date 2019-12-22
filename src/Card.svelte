@@ -1,6 +1,6 @@
 <script>
   import { spring } from "svelte/motion";
-  import { pannable } from "./pannable.js";
+  import { swipe } from "./swipe.js";
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
@@ -85,7 +85,7 @@
 {#if isFront}
   <div
     class="card"
-    use:pannable
+    use:swipe
     on:swipestart={handleSwipeStart}
     on:swipemove={handleSwipeMove}
     on:swipeend={handleSwipeEnd}
