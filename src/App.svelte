@@ -14,9 +14,9 @@
       { passive: false }
     );
     const res = await Promise.all([
-      fetch("https://source.unsplash.com/random"),
-      fetch("https://source.unsplash.com/random"),
-      fetch("https://source.unsplash.com/random")
+      fetch("https://picsum.photos/600"),
+      fetch("https://picsum.photos/600"),
+      fetch("https://picsum.photos/600")
     ]);
     images = await [res[0].url, res[1].url];
     nextSecondImage = await res[2].url;
@@ -24,7 +24,7 @@
 
   const cardSwipeStart = async () => {
     images = [images[1], images[1]];
-    const res = await fetch("https://source.unsplash.com/random");
+    const res = await fetch("https://picsum.photos/600");
     nextSecondImage = res.url;
   };
 
