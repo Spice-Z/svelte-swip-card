@@ -2,7 +2,7 @@ export function swipe(node) {
   let x;
   let y;
 
-  function handleTouchstart(event) {
+  const handleTouchstart = event => {
     x = event.touches[0].clientX;
     y = event.touches[0].clientY;
 
@@ -16,7 +16,7 @@ export function swipe(node) {
     window.addEventListener("touchend", handletouchEnd);
   }
 
-  function handletouchMove(event) {
+  const handletouchMove = event => {
     const dx = event.touches[0].clientX - x;
     const dy = event.touches[0].clientY - y;
     x = event.touches[0].clientX;
@@ -29,7 +29,7 @@ export function swipe(node) {
     );
   }
 
-  function handletouchEnd(event) {
+  const handletouchEnd = event => {
     node.dispatchEvent(new CustomEvent("swipeend"));
 
     window.removeEventListener("touchmove", handletouchMove);
