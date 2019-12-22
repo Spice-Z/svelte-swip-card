@@ -6,25 +6,31 @@
   let nextSecondImage = "";
 
   onMount(async () => {
+    window.addEventListener(
+      "touchmove",
+      e => {
+        e.preventDefault();
+      },
+      { passive: false }
+    );
     const res = await Promise.all([
       fetch("https://source.unsplash.com/random"),
       fetch("https://source.unsplash.com/random"),
-      fetch("https://source.unsplash.com/random"),
+      fetch("https://source.unsplash.com/random")
     ]);
     images = await [res[0].url, res[1].url];
     nextSecondImage = await res[2].url;
   });
 
   const cardSwipeStart = async () => {
-    images = [images[1],images[1]]
+    images = [images[1], images[1]];
     const res = await fetch("https://source.unsplash.com/random");
     nextSecondImage = res.url;
   };
 
   const cardSwipeEnd = () => {
-    images = [images[1],nextSecondImage]
-  }
-  
+    images = [images[1], nextSecondImage];
+  };
 </script>
 
 <style>
@@ -49,7 +55,10 @@
 
 <div class="nav">header</div>
 <div class="main">
-  <Card image={images[1]}/>
-  <Card image={images[0]} isFront on:cardSwipeStart={cardSwipeStart} on:cardSwipeEnd={cardSwipeEnd} />
+  <Card image={images[1]} />
+  <Card
+    image={images[0]}
+    isFront
+    on:cardSwipeStart={cardSwipeStart}
+    on:cardSwipeEnd={cardSwipeEnd} />
 </div>
-<svelte:body on:touchmove|preventDefault />
