@@ -52,3 +52,4 @@
   <Card image={images[1]}/>
   <Card image={images[0]} isFront on:cardSwipeStart={cardSwipeStart} on:cardSwipeEnd={cardSwipeEnd} />
 </div>
+<svelte:body on:touchmove|preventDefault />
