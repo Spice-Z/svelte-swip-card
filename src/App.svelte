@@ -6,6 +6,7 @@
   let nextSecondImage = "";
 
   onMount(async () => {
+    // safari のスクロールを無効化するために必要
     window.addEventListener(
       "touchmove",
       e => {
@@ -13,19 +14,20 @@
       },
       { passive: false }
     );
-    const res = await Promise.all([
+
+    const apiResponse = await Promise.all([
       fetch("https://picsum.photos/600"),
       fetch("https://picsum.photos/600"),
       fetch("https://picsum.photos/600")
     ]);
-    images = await [res[0].url, res[1].url];
-    nextSecondImage = await res[2].url;
+    images = await [apiResponse[0].url, apiResponse[1].url];
+    nextSecondImage = await apiResponse[2].url;
   });
 
   const cardSwipeStart = async () => {
     images = [images[1], images[1]];
-    const res = await fetch("https://picsum.photos/600");
-    nextSecondImage = res.url;
+    const apiResponse = await fetch("https://picsum.photos/600");
+    nextSecondImage = apiResponse.url;
   };
 
   const cardSwipeEnd = () => {
