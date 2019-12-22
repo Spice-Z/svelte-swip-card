@@ -67,7 +67,7 @@
     width: var(--width);
     height: var(--height);
     border-radius: 4px;
-    background-color: #ff3e00;
+    background-color: #a7a7a7;
     cursor: move;
   }
 
