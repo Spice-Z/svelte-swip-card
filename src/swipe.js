@@ -1,4 +1,4 @@
-export function swipe(node) {
+export const swipe = node => {
   let x;
   let y;
 
@@ -14,7 +14,7 @@ export function swipe(node) {
 
     window.addEventListener("touchmove", handletouchMove);
     window.addEventListener("touchend", handletouchEnd);
-  }
+  };
 
   const handletouchMove = event => {
     const dx = event.touches[0].clientX - x;
@@ -27,14 +27,14 @@ export function swipe(node) {
         detail: { x, y, dx, dy }
       })
     );
-  }
+  };
 
   const handletouchEnd = event => {
     node.dispatchEvent(new CustomEvent("swipeend"));
 
     window.removeEventListener("touchmove", handletouchMove);
     window.removeEventListener("touchend", handletouchEnd);
-  }
+  };
 
   node.addEventListener("touchstart", handleTouchstart);
 
@@ -43,4 +43,4 @@ export function swipe(node) {
       node.removeEventListener("touchstart", handleTouchstart);
     }
   };
-}
+};
